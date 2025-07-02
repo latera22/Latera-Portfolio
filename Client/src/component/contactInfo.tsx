@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   FaFacebookF,
   FaTwitter,
@@ -7,15 +7,14 @@ import {
 } from "react-icons/fa"; // Import icons from react-icons
 
 const Contact = () => {
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const [name, setName] = useState<string>(""); // State for name
+  const [email, setEmail] = useState<string>(""); // State for email
+  const [message, setMessage] = useState<string>(""); // State for message
 
-    const formData = new FormData(e.currentTarget);
-    const data = {
-      name: formData.get("name"),
-      email: formData.get("email"),
-      message: formData.get("message"),
-    };
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    const data = { name, email, message }; // Replace with your actual data
+    console.log("Sending data:", data);
 
     try {
       const response = await fetch("http://localhost:5000/send-email", {
@@ -24,21 +23,21 @@ const Contact = () => {
         body: JSON.stringify(data),
       });
 
-      if (response.ok) {
-        alert("Message sent successfully!");
-        e.currentTarget.reset();
-      } else {
-        alert("Failed to send message.");
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
+
+      const result = await response.json();
+      console.log("Response received:", result);
     } catch (error) {
-      alert("An error occurred.");
+      console.error("Error sending Message:", error);
     }
   };
 
   return (
     <section
       id="contact"
-      className="mt-6 section-container bg-gradient-to-r from-slate-200 via-white to-slate-200"
+      className="scroll-smooth mt-6 section-container bg-gradient-to-r from-slate-200 via-white to-slate-200"
     >
       <h2 className="mb-12 text-5xl font-bold section-title">Get In Touch</h2>
 
@@ -52,7 +51,7 @@ const Contact = () => {
 
           <div className="mb-8 space-y-4 font-medium text-black">
             <div className="flex items-center">
-              <span>hello@yourwebsite.com</span>
+              <span></span>
             </div>
             <div className="flex items-center">
               <span className="text-gray-700">+251-931-212-489</span>
@@ -62,7 +61,7 @@ const Contact = () => {
             </div>
             <div className="flex space-x-6">
               <a
-                href="https://facebook.com"
+                href="https://web.facebook.com/latera.negatu"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-700 transition-colors duration-300 hover:text-blue-600"
@@ -70,7 +69,7 @@ const Contact = () => {
                 <FaFacebookF size={24} />
               </a>
               <a
-                href="https://twitter.com"
+                href="https://x.com/LateraN202"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-700 transition-colors duration-300 hover:text-blue-400"
@@ -78,7 +77,7 @@ const Contact = () => {
                 <FaTwitter size={24} />
               </a>
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/latii_nig/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-700 transition-colors duration-300 hover:text-pink-600"
@@ -86,7 +85,7 @@ const Contact = () => {
                 <FaInstagram size={24} />
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/latera-nigatu/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-700 transition-colors duration-300 hover:text-blue-800"
@@ -121,6 +120,7 @@ const Contact = () => {
                 Name
               </label>
               <input
+                onChange={(e) => setName(e.target.value)}
                 type="text"
                 id="name"
                 name="name"
@@ -137,6 +137,7 @@ const Contact = () => {
                 Email
               </label>
               <input
+                onChange={(e) => setEmail(e.target.value)}
                 type="email"
                 id="email"
                 name="email"
@@ -153,6 +154,7 @@ const Contact = () => {
                 Message
               </label>
               <textarea
+                onChange={(e) => setMessage(e.target.value)}
                 id="message"
                 name="message"
                 rows={5}

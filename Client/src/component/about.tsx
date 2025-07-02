@@ -17,7 +17,7 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="section-container">
+    <section id="about" className="scroll-smooth section-container">
       <div className="grid gap-12 md:grid-cols-5">
         <div className="flex flex-col justify-center md:col-span-2">
           <div className="relative w-full mb-8 overflow-hidden shadow-xl aspect-square rounded-2xl md:mb-0">
