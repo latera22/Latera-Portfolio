@@ -1,0 +1,23 @@
+{
+    "builds": [
+      {
+        "src": "client/package.json",
+        "use": "@vercel/static-build"
+      },
+      {
+        "src": "server/send-email.js",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/api/send-email",
+        "dest": "server/send-email.js"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "/client/index.html"
+      }
+    ]
+  }
+  
