@@ -1,6 +1,6 @@
-import { Home } from "@mui/icons-material";
-import About from "./about";
-import Project from "./project";
+//import { Home } from "@mui/icons-material";
+//import About from "./about";
+//import Project from "./project";
 
 function Navbar() {
   return (
