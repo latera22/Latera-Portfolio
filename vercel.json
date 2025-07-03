@@ -21,6 +21,6 @@
   ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
-  ]
+  ],
   "outputDirectory": "Client/dist"
 }
