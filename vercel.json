@@ -12,15 +12,11 @@
   "routes": [
     {
       "src": "/api/send-email",
-      "dest": "/Server/send-email.js"
+      "dest": "Server/send-email.js"
     },
     {
       "src": "/(.*)",
-      "dest": "/Client/dist/index.html"
+      "dest": "Client/dist/index.html"
     }
-  ],
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
-  ],
-  "outputDirectory": "Client/dist"
+  ]
 }
