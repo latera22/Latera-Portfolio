@@ -7,12 +7,20 @@
       "config": {
         "distDir": "dist"
       }
+    },
+    {
+      "src": "api/send-email.js",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
     {
+      "src": "/api/send-email",
+      "dest": "api/send-email.js"
+    },
+    {
       "src": "/(.*)",
-      "dest": "/Client/$1"
+      "dest": "/Client/dist/index.html"
     }
   ]
 }
