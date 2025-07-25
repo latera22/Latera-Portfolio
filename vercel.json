@@ -1,9 +1,9 @@
 {
   "builds": [
     {
-      "src": "Client/package.json",
+      "src": "client/package.json",
       "use": "@vercel/static-build",
-      "config": { "distDir": "Client/dist" }
+      "config": { "distDir": "client/dist" }
     },
     {
       "src": "api/**/*.js",
@@ -13,6 +13,6 @@
   "routes": [
     { "src": "/api/(.*)", "dest": "/api/$1.js" },
     { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/Client/dist/index.html" }
+    { "src": "/(.*)", "dest": "/client/dist/index.html" }
   ]
 }
