@@ -15,10 +15,7 @@
       "dest": "/index.html"
     }
   ],
-  "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "/api/$1"
-    }
+   "rewrites": [
+    { "source": "/api/(.*)", "destination": "/client/api/$1" }
   ]
 }
