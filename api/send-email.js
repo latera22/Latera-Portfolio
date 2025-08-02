@@ -1,3 +1,4 @@
+// /api/send-email.js
 const express = require("express");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
@@ -43,3 +44,6 @@ app.post("/api/send-email", async (req, res) => {
 
 module.exports = app;
 module.exports.handler = serverless(app);
+
+// For Vercel API route, export the handler as default:
+module.exports = serverless(app);
