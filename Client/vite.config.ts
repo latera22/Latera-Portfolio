@@ -2,10 +2,11 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
-  base: '/',
+  base: '/',  // Your base path
   plugins: [react()],
   define: {
     __DEFINES__: {},
-    __HMR_CONFIG_NAME__: JSON.stringify('Latera Portfolio') // This defines it properly at build time
+    __HMR_CONFIG_NAME__: JSON.stringify('some_value'),
+    __BASE__: JSON.stringify('/')  // Define __BASE__ as stringified base path
   }
 })
