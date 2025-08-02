@@ -16,6 +16,6 @@
     }
   ],
    "rewrites": [
-    { "source": "/api/(.*)", "destination": "/client/api/$1" }
+    { "source": "/api/(.*)", "destination": "/Client/api/$1" }
   ]
 }
