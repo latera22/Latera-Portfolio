@@ -1,20 +1,58 @@
-//import { Home } from "@mui/icons-material";
-//import About from "./about";
-//import Project from "./project";
+import { useState } from "react";
 
 function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
-    <div>
-      <div className="flex items-center justify-between px-4 py-2 text-3xl font-bold text-black bg-gray-200">
-        <h1 className="justify-start text-lg font-semibold">My Portfolio</h1>
-        <div className="items-baseline pl-24 space-x-20 text-semibold">
-          <a href="">Home</a>
-          <a href="#about"> About</a>
-          <a href="#project">Projects</a>
-          <a href="#contact">Contact</a>
-        </div>
+    <header className="sticky top-0 z-50 bg-gray-200 shadow-md">
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-3">
+        {/* Logo / Title */}
+        <h1 className="text-xl font-semibold text-black">Latera Portfolio</h1>
+
+        {/* Desktop Menu */}
+        <nav className="hidden md:flex space-x-8 text-lg font-medium text-gray-800">
+          <a href="#home" className="hover:text-purple-600">
+            Home
+          </a>
+          <a href="#about" className="hover:text-purple-600">
+            About
+          </a>
+          <a href="#project" className="hover:text-purple-600">
+            Projects
+          </a>
+          <a href="#contact" className="hover:text-purple-600">
+            Contact
+          </a>
+        </nav>
+
+        {/* Mobile Menu Toggle */}
+        <button
+          className="md:hidden text-3xl focus:outline-none"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle menu"
+        >
+          {menuOpen ? "✕" : "☰"}
+        </button>
       </div>
-    </div>
+
+      {/* Mobile Menu */}
+      {menuOpen && (
+        <div className="md:hidden px-4 pb-4 space-y-2 text-lg font-medium text-gray-800">
+          <a href="#home" className="block hover:text-purple-600">
+            Home
+          </a>
+          <a href="#about" className="block hover:text-purple-600">
+            About
+          </a>
+          <a href="#project" className="block hover:text-purple-600">
+            Projects
+          </a>
+          <a href="#contact" className="block hover:text-purple-600">
+            Contact
+          </a>
+        </div>
+      )}
+    </header>
   );
 }
 

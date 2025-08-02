@@ -125,7 +125,7 @@ const Contact = () => {
                 id="name"
                 name="name"
                 required
-                className="w-full px-4 py-3 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-portfolio-purple focus:border-transparent"
+                className="mr-8 w-full px-4 py-3 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-portfolio-purple focus:border-transparent"
               />
             </div>
 
@@ -142,7 +142,7 @@ const Contact = () => {
                 id="email"
                 name="email"
                 required
-                className="w-full px-4 py-3 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-portfolio-purple focus:border-transparent"
+                className="mr-8 w-full px-4 py-3 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-portfolio-purple focus:border-transparent"
               />
             </div>
 
@@ -159,7 +159,7 @@ const Contact = () => {
                 name="message"
                 rows={5}
                 required
-                className="w-full px-4 py-3 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-portfolio-purple focus:border-transparent"
+                className="mr-8 w-full px-4 py-3 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-portfolio-purple focus:border-transparent"
               ></textarea>
             </div>
 
