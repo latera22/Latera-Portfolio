@@ -18,6 +18,7 @@ const Contact = () => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     setStatus("sending");
+    setErrorMsg("");
 
     try {
       const response = await fetch("/api/send-email", {
@@ -26,9 +27,17 @@ const Contact = () => {
         body: JSON.stringify({ name, email, message }),
       });
 
+      let data;
+      try {
+        data = await response.json();
+      } catch {
+        // If response is not JSON, get text instead
+        const text = await response.text();
+        throw new Error("Unexpected response from server: " + text);
+      }
+
       if (!response.ok) {
-        const errData = await response.json();
-        throw new Error(errData.message || "Failed to send message");
+        throw new Error(data.message || "Failed to send message");
       }
 
       setStatus("success");
