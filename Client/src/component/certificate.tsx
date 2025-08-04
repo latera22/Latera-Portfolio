@@ -1,5 +1,6 @@
 import andDeveloper from "../assets/image/andDeveloper.jpg";
 import bg1 from "../assets/image/bg1.png";
+import DataScience from "../assets/image/DataScience.jpg";
 function Certificate() {
   return (
     <>
@@ -48,7 +49,7 @@ function Certificate() {
               <div className="flex flex-col ">
                 <div className="ml-10 items-center md:flex-row mt-4">
                   <img
-                    src={andDeveloper}
+                    src={DataScience}
                     alt="Certificate for Fundamentals of Mobile App Development from Udemy"
                     className="object-contain max-h-80 max-w-80 ml-7 p-7 "
                   />
