@@ -64,7 +64,7 @@ function Certificate() {
               </div>
             </div>
           </div>
-          <div className=" mt-14 flex flex-col items-center text-3xl font-bold">
+          <div className=" mt-14 flex flex-col items-center justify-center text-3xl font-bold">
             <h2>
               You can download my CV and certificates from the links below
             </h2>
