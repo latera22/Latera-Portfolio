@@ -27,12 +27,12 @@ const Contact = () => {
         body: JSON.stringify({ name, email, message }),
       });
 
+      const text = await response.text();
       let data;
+
       try {
-        data = await response.json();
+        data = JSON.parse(text);
       } catch {
-        // If response is not JSON, get text instead
-        const text = await response.text();
         throw new Error("Unexpected response from server: " + text);
       }
 
