@@ -1,5 +1,5 @@
 import latoo from "../assets/image/latoo.jpg";
-
+import bg3 from "../assets/image/bg3.png";
 const About = () => {
   const skills = [
     "Web Design",
@@ -19,7 +19,12 @@ const About = () => {
   return (
     <section
       id="about"
-      className="min-h-screen bg-white px-4 py-20 sm:px-6 lg:px-16 scroll-smooth"
+      className="bg-no-repeat min-h-screen bg-white px-4 py-20 sm:px-6 lg:px-16 scroll-smooth"
+      style={{
+        backgroundImage: `url(${bg3})`,
+        backgroundSize: "600px",
+        backgroundPosition: "right",
+      }}
     >
       <div className="max-w-7xl mx-auto grid gap-12 md:grid-cols-5 items-center">
         {/* Image Section */}
@@ -40,14 +45,14 @@ const About = () => {
             About Me
           </h2>
 
-          <p className="text-base sm:text-lg md:text-xl text-gray-700 mb-6 leading-relaxed">
+          <p className="text-base font-semibold sm:text-lg md:text-xl text-gray-700 mb-6 leading-relaxed">
             I'm a passionate designer and developer with a keen eye for detail
             and a love for creating beautiful, functional digital experiences.
             With over 5 years of experience, I’ve worked with various teams to
             bring creative ideas to life.
           </p>
 
-          <p className="text-base sm:text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
+          <p className="text-base font-semibold sm:text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
             My approach blends technical skill and creative thinking to deliver
             elegant, user-centered solutions. I’m committed to continuous
             learning and staying current with the latest technologies and design

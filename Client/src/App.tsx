@@ -4,6 +4,7 @@ import Project from "./component/project";
 import About from "./component/about";
 import Hero from "./component/home";
 import Contact from "./component/contactInfo";
+import Certificate from "./component/certificate";
 const App = () => {
   return (
     <div>
@@ -18,6 +19,9 @@ const App = () => {
       </div>
       <div>
         <Project />
+      </div>
+      <div>
+        <Certificate />
       </div>
       <div>
         <Contact />

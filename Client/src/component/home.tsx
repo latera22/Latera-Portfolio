@@ -1,10 +1,15 @@
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-
+import bg2 from "../assets/image/bg2.png";
 const Hero = () => {
   return (
     <div
       id="home"
-      className="min-h-screen flex items-center justify-center bg-gradient-to-r from-white via-gray-200 to-white px-4 sm:px-6 lg:px-8"
+      className="min-h-screen  bg-no-repeat flex items-center justify-center bg-gradient-to-r from-white via-gray-200 to-white px-4 sm:px-6 lg:px-8"
+      style={{
+        backgroundImage: `url(${bg2})`,
+        backgroundSize: "2000px",
+        backgroundPosition: "center",
+      }}
     >
       <div className="text-center">
         <h4 className="text-purple-600 text-base sm:text-lg font-semibold">
@@ -40,7 +45,7 @@ const Hero = () => {
             href="#about"
             className="flex flex-col items-center text-sm text-gray-500 hover:text-purple-600 transition-colors"
           >
-            <span className="mb-1">Scroll Down</span>
+            <span className="mb-1 text-purple-950 font-bold">Scroll Down</span>
             <KeyboardArrowDownIcon className="text-3xl animate-bounce" />
           </a>
         </div>

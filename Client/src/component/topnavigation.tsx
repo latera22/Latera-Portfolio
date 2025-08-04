@@ -20,6 +20,9 @@ function Navbar() {
           <a href="#project" className="hover:text-purple-600">
             Projects
           </a>
+          <a href="#certificate" className="hover:text-purple-600">
+            Certificate
+          </a>
           <a href="#contact" className="hover:text-purple-600">
             Contact
           </a>
@@ -46,6 +49,9 @@ function Navbar() {
           </a>
           <a href="#project" className="block hover:text-purple-600">
             Projects
+          </a>
+          <a href="#certificate" className="hover:text-purple-600">
+            Certificate
           </a>
           <a href="#contact" className="block hover:text-purple-600">
             Contact
