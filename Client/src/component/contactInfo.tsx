@@ -1,10 +1,73 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   FaFacebookF,
   FaTwitter,
   FaInstagram,
   FaLinkedinIn,
 } from "react-icons/fa";
+
+// A reusable input component for our form
+const FormInput = ({
+  id,
+  label,
+  type,
+  value,
+  onChange,
+  required = false,
+}: {
+  id: string;
+  label: string;
+  type: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  required?: boolean;
+}) => (
+  <div>
+    <label
+      htmlFor={id}
+      className="block mb-1 text-sm font-medium text-gray-700"
+    >
+      {label}
+    </label>
+    <input
+      value={value}
+      onChange={onChange}
+      type={type}
+      id={id}
+      name={id}
+      required={required}
+      className="w-full px-4 py-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-portfolio-purple focus:outline-none"
+    />
+  </div>
+);
+
+// Data for social media links
+const socialLinks = [
+  {
+    href: "https://web.facebook.com/latera.negatu",
+    label: "Facebook",
+    icon: FaFacebookF,
+    hoverClass: "hover:text-blue-600",
+  },
+  {
+    href: "https://x.com/LateraN202",
+    label: "Twitter",
+    icon: FaTwitter,
+    hoverClass: "hover:text-blue-400",
+  },
+  {
+    href: "https://www.instagram.com/latii_nig/",
+    label: "Instagram",
+    icon: FaInstagram,
+    hoverClass: "hover:text-pink-600",
+  },
+  {
+    href: "https://www.linkedin.com/in/latera-nigatu/",
+    label: "LinkedIn",
+    icon: FaLinkedinIn,
+    hoverClass: "hover:text-blue-800",
+  },
+];
 
 const Contact = () => {
   const [name, setName] = useState("");
@@ -14,6 +77,18 @@ const Contact = () => {
     "idle" | "sending" | "success" | "error"
   >("idle");
   const [errorMsg, setErrorMsg] = useState("");
+
+  // Effect to clear status messages after a few seconds
+  useEffect(() => {
+    if (status === "success" || status === "error") {
+      const timer = setTimeout(() => {
+        setStatus("idle");
+      }, 5000); // Hide after 5 seconds
+
+      // Cleanup the timer if the component unmounts
+      return () => clearTimeout(timer);
+    }
+  }, [status]);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -27,29 +102,23 @@ const Contact = () => {
         body: JSON.stringify({ name, email, message }),
       });
 
-      const text = await response.text();
-      let data;
-
-      try {
-        data = JSON.parse(text);
-      } catch {
-        throw new Error("Unexpected response from server: " + text);
-      }
-
       if (!response.ok) {
+        // Try to get the error message from the JSON response body
+        const data = await response.json().catch(() => ({
+          message: "Failed to send message. Please try again later.",
+        }));
         throw new Error(data.message || "Failed to send message");
       }
 
+      // If response is ok, we can assume success
       setStatus("success");
       setName("");
       setEmail("");
       setMessage("");
     } catch (error: unknown) {
-      if (error instanceof Error) {
-        setErrorMsg(error.message);
-      } else {
-        setErrorMsg("Unexpected error occurred");
-      }
+      setErrorMsg(
+        error instanceof Error ? error.message : "An unexpected error occurred."
+      );
       setStatus("error");
     }
   };
@@ -75,50 +144,18 @@ const Contact = () => {
             <div className="text-gray-700">📍 Addis Ababa, Ethiopia</div>
 
             <div className="flex space-x-6">
-              <a
-                href="https://web.facebook.com/latera.negatu"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook"
-              >
-                <FaFacebookF
-                  className="text-gray-700 hover:text-blue-600"
-                  size={24}
-                />
-              </a>
-              <a
-                href="https://x.com/LateraN202"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Twitter"
-              >
-                <FaTwitter
-                  className="text-gray-700 hover:text-blue-400"
-                  size={24}
-                />
-              </a>
-              <a
-                href="https://www.instagram.com/latii_nig/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-              >
-                <FaInstagram
-                  className="text-gray-700 hover:text-pink-600"
-                  size={24}
-                />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/latera-nigatu/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-              >
-                <FaLinkedinIn
-                  className="text-gray-700 hover:text-blue-800"
-                  size={24}
-                />
-              </a>
+              {socialLinks.map(({ href, label, icon: Icon, hoverClass }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className={`text-gray-700 transition-colors ${hoverClass}`}
+                >
+                  <Icon size={24} />
+                </a>
+              ))}
             </div>
           </div>
         </div>
@@ -126,41 +163,22 @@ const Contact = () => {
         {/* Contact Form */}
         <div>
           <form onSubmit={handleSubmit} className="space-y-5">
-            <div>
-              <label
-                htmlFor="name"
-                className="block mb-1 text-sm font-medium text-gray-700"
-              >
-                Name
-              </label>
-              <input
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                type="text"
-                id="name"
-                name="name"
-                required
-                className="w-full px-4 py-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-portfolio-purple focus:outline-none"
-              />
-            </div>
-
-            <div>
-              <label
-                htmlFor="email"
-                className="block mb-1 text-sm font-medium text-gray-700"
-              >
-                Email
-              </label>
-              <input
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                type="email"
-                id="email"
-                name="email"
-                required
-                className="w-full px-4 py-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-portfolio-purple focus:outline-none"
-              />
-            </div>
+            <FormInput
+              id="name"
+              label="Name"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+            <FormInput
+              id="email"
+              label="Email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
 
             <div>
               <label

@@ -1,5 +1,11 @@
 import nodemailer from "nodemailer";
 
+// Basic email validation
+const validateEmail = (email) => {
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return re.test(String(email).toLowerCase());
+};
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Method not allowed" });
@@ -11,7 +17,14 @@ export default async function handler(req, res) {
     return res.status(400).json({ message: "Missing required fields" });
   }
 
+  if (!validateEmail(email)) {
+    return res.status(400).json({ message: "Invalid email format" });
+  }
+
   try {
+    // It's highly recommended to use an "App Password" for your Gmail account
+    // instead of your regular password, especially for production.
+    // See: https://support.google.com/accounts/answer/185833
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -21,13 +34,20 @@ export default async function handler(req, res) {
     });
 
     const mailOptions = {
-      from: email,
+      from: `"Portfolio Contact" <${process.env.EMAIL_USER}>`, // This will be the sender's name and email
       to: process.env.EMAIL_USER,
+      replyTo: email, // So you can reply directly to the form submitter
       subject: `Portfolio Message from ${name}`,
       text: `
         Name: ${name}
         Email: ${email}
         Message: ${message}
+      `,
+      html: `
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
+        <p><strong>Message:</strong></p>
+        <p>${message.replace(/\n/g, "<br>")}</p>
       `,
     };
 
