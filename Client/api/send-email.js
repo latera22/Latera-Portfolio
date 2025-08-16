@@ -7,6 +7,11 @@ const validateEmail = (email) => {
 };
 
 export default async function handler(req, res) {
+  if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+    console.error('ERROR: Missing EMAIL_USER or EMAIL_PASS environment variables');
+    return res.status(500).json({ message: 'Server configuration error.' });
+  }
+
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Method not allowed" });
   }
