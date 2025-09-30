@@ -8,7 +8,6 @@ function Navbar() {
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-3">
         {/* Logo / Title */}
         <h1 className="text-xl font-semibold text-black">Latera Portfolio</h1>
-
         {/* Desktop Menu */}
         <nav className="hidden md:flex space-x-8 text-lg font-medium text-gray-800">
           <a href="#home" className="hover:text-purple-600">
