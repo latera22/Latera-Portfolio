@@ -5,17 +5,11 @@ export default defineConfig({
   base: '/',
   plugins: [react()],
   define: {
-<<<<<<< HEAD
-    __DEFINE__: {
-    'my.custom.setting': JSON.stringify('value'),
-  },
-    __BASE__: JSON.stringify('/'),
-=======
+
    __DEFINES__: {
-      'my.custom.setting': JSON.stringify('value'), // ✅ OK
+      'my.custom.setting': JSON.stringify('value'),
    },
    __BASE__: JSON.stringify('/'),
->>>>>>> 0ba90a3 (new one)
     __HMR_CONFIG_NAME__: JSON.stringify("Latera Portfolio"),
     __SERVER_HOST__: JSON.stringify("localhost"),
     __HMR_PROTOCOL__: JSON.stringify("ws"),
