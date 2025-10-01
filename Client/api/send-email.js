@@ -6,6 +6,15 @@ const validateEmail = (email) => {
   return re.test(String(email).toLowerCase());
 };
 
+// Basic HTML escaping
+const escapeHTML = (str) => {
+  return str.replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
+};
+
 export default async function handler(req, res) {
   if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
     console.error('ERROR: Missing EMAIL_USER or EMAIL_PASS environment variables');
@@ -39,7 +48,7 @@ export default async function handler(req, res) {
     });
 
     const mailOptions = {
-      from: process.env.EMAIL_USER ? `"Portfolio Contact" <${process.env.EMAIL_USER}>` : `"Portfolio Contact" <noreply@example.com>`, // This will be the sender's name and email
+      from: `"Portfolio Contact" <${process.env.EMAIL_USER}>`, // This will be the sender's name and email
       to: process.env.EMAIL_USER,
       replyTo: email, // So you can reply directly to the form submitter
       subject: `Portfolio Message from ${name}`,
@@ -52,7 +61,7 @@ export default async function handler(req, res) {
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
         <p><strong>Message:</strong></p>
-        <p>${message.replace(/\n/g, "<br>")}</p>
+        <p>${escapeHTML(message).replace(/\n/g, "<br>")}</p>
       `,
     };
 
