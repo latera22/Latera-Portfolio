@@ -18,8 +18,7 @@ export default defineConfig({
     __HMR_HOSTNAME__: JSON.stringify("localhost"),
     __HMR_BASE__: JSON.stringify("/"),
     __HMR_DIRECT_TARGET__: JSON.stringify(""),
+    __WS_TOKEN__: JSON.stringify(""),
     __HMR_ENABLE_OVERLAY__: JSON.stringify(true)
   }
-  // The 'define' block was removed to let Vite manage its own HMR configuration.
-  // If you have custom global variables, you can add a 'define' block with only those.
 })
