@@ -39,7 +39,7 @@ export default async function handler(req, res) {
     });
 
     const mailOptions = {
-      from: `"Portfolio Contact" <${process.env.EMAIL_USER}>`, // This will be the sender's name and email
+      from: process.env.EMAIL_USER ? `"Portfolio Contact" <${process.env.EMAIL_USER}>` : `"Portfolio Contact" <noreply@example.com>`, // This will be the sender's name and email
       to: process.env.EMAIL_USER,
       replyTo: email, // So you can reply directly to the form submitter
       subject: `Portfolio Message from ${name}`,
